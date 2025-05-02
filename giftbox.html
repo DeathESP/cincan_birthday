@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>🎁 Happy Birthday Cincan!</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://static-00.iconduck.com/assets.00/gift-icon-2048x1882-1wugth41.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://static-00.iconduck.com/assets.00/gift-icon-2048x1882-1wugth41.png"
+    />
+
+    <link rel="stylesheet" href="giftbox.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6859/tweenmax.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6859/jquery.superscrollorama.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6859/iscroll.js"></script>
+  </head>
+  <body>
+    <section id="js-main" class="main">
+      <div class="box">
+        <div class="box__item box__item--base"></div>
+        <div class="box__item box__item--left"></div>
+        <div class="box__item box__item--right"></div>
+        <div class="box__item box__item--top"></div>
+        <div class="box__item box__item--bottom"></div>
+        <div class="box__item box__item--shadow"></div>
+      </div>
+      <div class="birthday-text">
+        <table id="demo">
+          <tr>
+            <td>
+              <span class="color1">H</span>
+              <span class="color2">A</span>
+              <span class="color3">P</span>
+              <span class="color4">P</span>
+              <span class="color5">Y</span>
+              <span class="color1">&nbsp;</span>
+              <span class="color6">B</span>
+              <span class="color7">I</span>
+              <span class="color8">R</span>
+              <span class="color9">T</span>
+              <span class="color10">H</span>
+              <span class="color11">D</span>
+              <span class="color12">A</span>
+              <span class="color13">Y</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="color14">C</span>
+              <span class="color15">I</span>
+              <span class="color16">N</span>
+              <span class="color17">C</span>
+              <span class="color18">A</span>
+              <span class="color19">N</span>
+              <span class="color20">!</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="next_button">Click Me!</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <a id="js-icon1" class="box-icon box-icon--one">
+        <div class="box-icon__shadow"></div
+      ></a>
+      <a id="js-icon2" class="box-icon box-icon--two">
+        <div class="box-icon__shadow">
+          <!-- <button id="next_button">Tombol?</button> -->
+        </div></a
+      ><a id="js-icon3" class="box-icon box-icon--three">
+        <div class="box-icon__shadow"></div
+      ></a>
+      <div id="js-cover-place" class="cover-place">
+        <div id="js-cover" class="cover">
+          <div class="cover__item cover__item--base">
+            <div id="js-base-shadow" class="cover__item__shadow"></div>
+          </div>
+          <div class="cover__item cover__item--left"></div>
+          <div class="cover__item cover__item--bottom">
+            <div id="js-bottom-shadow" class="cover__item__shadow"></div>
+          </div>
+        </div>
+      </div>
+      <div id="js-left-peel" class="peel-item peel-item--left">
+        <div class="peel-item__bg">
+          <div id="js-left-inner" class="peel-item__bg__inner"></div>
+        </div>
+        <div class="peel-item__white"></div>
+        <div class="peel-item__gradient"></div>
+      </div>
+      <div id="js-right-peel" class="peel-item peel-item--right">
+        <div class="peel-item__bg">
+          <div id="js-right-inner" class="peel-item__bg__inner"></div>
+        </div>
+        <div class="peel-item__white"></div>
+        <div class="peel-item__gradient"></div>
+      </div>
+      <div id="js-line1" class="line-item line-item--hor"></div>
+      <div id="js-line2" class="line-item line-item--vert">
+        <div class="bow">
+          <div class="bow__content"></div>
+          <div class="threads">
+            <div class="thread-left">
+              <div class="thread-left__content"></div>
+            </div>
+            <div class="thread-right">
+              <div class="thread-right__content"></div>
+            </div>
+          </div>
+          <a id="js-tag" class="tag">
+            <div class="tag__content"></div>
+            <div class="tag__text">
+              Happiest birthday to the most amazing girl I know!
+            </div></a
+          >
+        </div>
+      </div>
+      <div id="js-scroll-suggest" class="scroll-suggest">
+        <div class="scroll-suggest__content"></div>
+      </div>
+      <div
+        id="js-scroll-suggest-mask"
+        class="scroll-suggest scroll-suggest--mask"
+      >
+        <div class="scroll-suggest__content"></div>
+      </div>
+    </section>
+  </body>
+
+  <script>
+    (function () {
+      var Main;
+
+      Main = (function () {
+        function Main() {
+          this.vars();
+          this.fixIETag();
+          this.initScroll();
+          this.describeSequence();
+          this.suggestScroll();
+        }
+
+        Main.prototype.vars = function () {
+          this.frameDur = 1500;
+          this.$cover = $("#js-cover");
+          this.$coverPlace = $("#js-cover-place");
+          this.$icon1 = $("#js-icon1 .box-icon__content");
+          this.$icon2 = $("#js-icon2 .box-icon__content");
+          this.$icon3 = $("#js-icon3 .box-icon__content");
+          this.$icon4 = $("#next_button");
+          this.$baseShadow = $("#js-base-shadow");
+          this.$bottomShadow = $("#js-bottom-shadow");
+          this.$leftPeel = $("#js-left-peel");
+          this.$leftPeelInner = $("#js-left-inner");
+          this.$leftPeelChildren = this.$leftPeel.children();
+          this.$rightPeel = $("#js-right-peel");
+          this.$rightPeelInner = $("#js-right-inner");
+          this.$rightPeelChildren = this.$rightPeel.children();
+          this.$line1 = $("#js-line1");
+          this.$line2 = $("#js-line2");
+          this.$tag = $("#js-tag");
+          this.$scrollSuggest = $("#js-scroll-suggest");
+          this.$scrollSuggestMask = $("#js-scroll-suggest-mask");
+          this.$curtain = $("#js-curtain");
+          return (this.$w = $(window));
+        };
+
+        Main.prototype.hideCurtain = function () {
+          return this.$curtain.fadeOut(1000);
+        };
+
+        Main.prototype.suggestScroll = function () {
+          return (this.scrollSuggestTween = TweenMax.to(
+            this.$scrollSuggest,
+            0.5,
+            {
+              y: 10,
+              repeat: -1,
+              opacity: 1,
+              yoyo: true,
+              ease: Power2.easeIn,
+            }
+          ));
+        };
+
+        Main.prototype.stopScollSuggest = function () {
+          this.scrollSuggestTween.pause();
+          this.$scrollSuggest.hide();
+          return this.$scrollSuggestMask.hide();
+        };
+
+        Main.prototype.playScollSuggest = function () {
+          this.$scrollSuggest.show();
+          this.$scrollSuggestMask.show();
+          return this.scrollSuggestTween.play();
+        };
+
+        Main.prototype.describeSequence = function () {
+          var dur, start;
+          start = 1;
+          dur = this.frameDur;
+          this.line2Tween = TweenMax.to(this.$line2, 1, {
+            left: -300,
+            rotation: 15,
+            onStart: (function (_this) {
+              return function () {
+                return _this.stopScollSuggest();
+              };
+            })(this),
+            onReverseComplete: (function (_this) {
+              return function () {
+                return _this.playScollSuggest();
+              };
+            })(this),
+          });
+          this.controller.addTween(start, this.line2Tween, dur);
+          this.tagTween = TweenMax.to(this.$tag, 1, {
+            rotation: 35,
+          });
+          this.controller.addTween(start, this.tagTween, dur);
+          start += dur / 2.5;
+          dur = this.frameDur;
+          this.line1Tween = TweenMax.to(this.$line1, 1, {
+            top: -300,
+            rotation: 15,
+          });
+          this.controller.addTween(start, this.line1Tween, dur);
+          start += dur - dur / 3;
+          dur = this.frameDur - this.frameDur / 4;
+          this.leftPeelTween = TweenMax.to(this.$leftPeel, 1, {
+            left: "-50%",
+          });
+          this.controller.addTween(start, this.leftPeelTween, dur);
+          this.leftPeelChildrenTween = TweenMax.to(this.$leftPeelChildren, 1, {
+            width: "100%",
+          });
+          this.controller.addTween(start, this.leftPeelChildrenTween, dur);
+          this.leftPeelTweenInner = TweenMax.to(this.$leftPeelInner, 1, {
+            left: "100%",
+            onStart: (function (_this) {
+              return function () {
+                if (!_this.isChromeFix()) {
+                  return;
+                }
+                return _this.$leftPeelInner.css({
+                  "-webkit-transform": "translateX(1px)",
+                });
+              };
+            })(this),
+            onReverseComplete: (function (_this) {
+              return function () {
+                if (!_this.isChromeFix()) {
+                  return;
+                }
+                return _this.$leftPeelInner.css({
+                  "-webkit-transform": "translateX(0px)",
+                });
+              };
+            })(this),
+          });
+          this.controller.addTween(start, this.leftPeelTweenInner, dur);
+          this.rightPeelTween = TweenMax.to(this.$rightPeel, 1, {
+            left: "100%",
+          });
+          this.controller.addTween(start, this.rightPeelTween, dur);
+          this.rightPeelChildrenTween = TweenMax.to(
+            this.$rightPeelChildren,
+            1,
+            {
+              width: "100%",
+            }
+          );
+          this.controller.addTween(start, this.rightPeelChildrenTween, dur);
+          this.rightPeelTweenInner = TweenMax.to(this.$rightPeelInner, 1, {
+            left: "-100%",
+          });
+          this.controller.addTween(start, this.rightPeelTweenInner, dur);
+          start += dur;
+          dur = this.frameDur;
+          this.coverBaseShadowTween = TweenMax.to(this.$baseShadow, 1, {
+            opacity: 1,
+          });
+          this.coverBottomShadowTween = TweenMax.to(this.$bottomShadow, 1, {
+            opacity: 0.5,
+          });
+          this.coverTween = TweenMax.to(this.$cover, 1, {
+            rotationY: 120,
+            rotationX: 65,
+            x: this.$w.width() / 6.4,
+            y: -400,
+            onUpdate: (function (_this) {
+              return function () {
+                var progress;
+                progress = _this.coverTween.progress();
+                // if (progress > 0.225) {
+                //   _this.$icon1.css({
+                //     "z-index": 11,
+                //   });
+                // } else {
+                //   _this.$icon1.css({
+                //     "z-index": 1,
+                //   });
+                // }
+                // if (progress > 0.265) {
+                //   _this.$icon2.css({
+                //     "z-index": 11,
+                //   });
+                // } else {
+                //   _this.$icon2.css({
+                //     "z-index": 1,
+                //   });
+                // }
+                // if (progress > 0.307) {
+                //   return _this.$icon3.css({
+                //     "z-index": 11,
+                //   });
+                // } else {
+                //   return _this.$icon3.css({
+                //     "z-index": 1,
+                //   });
+                // }
+                if (progress > 0.307) {
+                  return _this.$icon4.css({
+                    "z-index": 11,
+                  });
+                } else {
+                  return _this.$icon4.css({
+                    "z-index": 1,
+                  });
+                }
+              };
+            })(this),
+          });
+          this.controller.addTween(start, this.coverTween, dur);
+          this.controller.addTween(start, this.coverBaseShadowTween, dur / 2);
+          this.controller.addTween(start, this.coverBottomShadowTween, dur / 2);
+          return (this.maxScroll = -(start + dur / 2));
+        };
+
+        Main.prototype.fixIETag = function () {
+          if (!this.isIE()) {
+            return;
+          }
+          return $(document.body).addClass("ie");
+        };
+
+        Main.prototype.initScroll = function () {
+          var it;
+          this.scroller = new IScroll("#js-main", {
+            probeType: 3,
+            mouseWheel: true,
+            deceleration: 0.001,
+          });
+          document.addEventListener(
+            "touchmove",
+            function (e) {
+              return e.preventDefault();
+            },
+            false
+          );
+          this.controller = $.superscrollorama({
+            triggerAtCenter: false,
+            playoutAnimations: true,
+          });
+          it = this;
+          this.scroller.on("scroll", function () {
+            return it.updateScrollPos(this, it);
+          });
+          return this.scroller.on("scrollEnd", function () {
+            return it.updateScrollPos(this, it);
+          });
+        };
+
+        Main.prototype.updateScrollPos = function (that, it) {
+          that.y < it.maxScroll && (that.y = it.maxScroll);
+          return it.controller
+            .setScrollContainerOffset(0, -(that.y >> 0))
+            .triggerCheckAnim(true);
+        };
+
+        Main.prototype.bind = function (func, context) {
+          var bindArgs, wrapper;
+          wrapper = function () {
+            var args, unshiftArgs;
+            args = Array.prototype.slice.call(arguments);
+            unshiftArgs = bindArgs.concat(args);
+            return func.apply(context, unshiftArgs);
+          };
+          bindArgs = Array.prototype.slice.call(arguments, 2);
+          return wrapper;
+        };
+
+        Main.prototype.isChromeFix = function () {
+          var ver, _ref;
+          ver = parseInt(
+            (_ref = window.navigator.appVersion.match(/Chrome\/(\d+)\./)) !=
+              null
+              ? _ref[1]
+              : void 0,
+            10
+          );
+          return (
+            ver > 33 && navigator.userAgent.toLowerCase().indexOf("chrome") > -1
+          );
+        };
+
+        Main.prototype.isFF = function () {
+          return navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+        };
+
+        Main.prototype.isIE = function () {
+          var msie, rv, rvNum, trident, ua, undef;
+          if (this.isIECache) {
+            return this.isIECache;
+          }
+          undef = void 0;
+          rv = -1;
+          ua = window.navigator.userAgent;
+          msie = ua.indexOf("MSIE ");
+          trident = ua.indexOf("Trident/");
+          if (msie > 0) {
+            rv = parseInt(ua.substring(msie + 5, ua.indexOf(".", msie)), 10);
+          } else if (trident > 0) {
+            rvNum = ua.indexOf("rv:");
+            rv = parseInt(ua.substring(rvNum + 3, ua.indexOf(".", rvNum)), 10);
+          }
+          this.isIECache = rv > -1 ? rv : undef;
+          return this.isIECache;
+        };
+
+        return Main;
+      })();
+
+      new Main();
+    }).call(this);
+
+    // Party Confetti
+    class Progress {
+      constructor(param = {}) {
+        this.timestamp = null;
+        this.duration = param.duration || Progress.CONST.DURATION;
+        this.progress = 0;
+        this.delta = 0;
+        this.isLoop = !!param.isLoop;
+
+        this.reset();
+      }
+
+      static get CONST() {
+        return {
+          DURATION: 1000,
+        };
+      }
+
+      reset() {
+        this.timestamp = null;
+      }
+
+      start(now) {
+        this.timestamp = now;
+      }
+
+      tick(now) {
+        if (this.timestamp) {
+          this.delta = now - this.timestamp;
+          this.progress = Math.min(this.delta / this.duration, 1);
+
+          if (this.progress >= 1 && this.isLoop) {
+            this.start(now);
+          }
+
+          return this.progress;
+        } else {
+          return 0;
+        }
+      }
+    }
+
+    class Confetti {
+      constructor(param) {
+        this.parent = param.elm || document.body;
+        this.canvas = document.createElement("canvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.width = param.width || this.parent.offsetWidth;
+        this.height = param.height || this.parent.offsetHeight;
+        this.length = param.length || Confetti.CONST.PAPER_LENGTH;
+        this.yRange = param.yRange || this.height * 2;
+        this.progress = new Progress({
+          duration: param.duration,
+          isLoop: true,
+        });
+        this.rotationRange =
+          typeof param.rotationRange === "number" ? param.rotationRange : 10;
+        this.speedRange =
+          typeof param.speedRange === "number" ? param.speedRange : 10;
+        this.sprites = [];
+
+        this.canvas.style.cssText = [
+          "display: block",
+          "position: absolute",
+          "top: 0",
+          "left: 0",
+          "pointer-events: none",
+        ].join(";");
+
+        this.render = this.render.bind(this);
+
+        this.build();
+
+        this.parent.appendChild(this.canvas);
+        this.progress.start(performance.now());
+
+        requestAnimationFrame(this.render);
+      }
+
+      static get CONST() {
+        return {
+          SPRITE_WIDTH: 9,
+          SPRITE_HEIGHT: 16,
+          PAPER_LENGTH: 100,
+          DURATION: 8000,
+          ROTATION_RATE: 50,
+          COLORS: [
+            "#EF5350",
+            "#EC407A",
+            "#AB47BC",
+            "#7E57C2",
+            "#5C6BC0",
+            "#42A5F5",
+            "#29B6F6",
+            "#26C6DA",
+            "#26A69A",
+            "#66BB6A",
+            "#9CCC65",
+            "#D4E157",
+            "#FFEE58",
+            "#FFCA28",
+            "#FFA726",
+            "#FF7043",
+            "#8D6E63",
+            "#BDBDBD",
+            "#78909C",
+          ],
+        };
+      }
+
+      build() {
+        for (let i = 0; i < this.length; ++i) {
+          let canvas = document.createElement("canvas"),
+            ctx = canvas.getContext("2d");
+
+          canvas.width = Confetti.CONST.SPRITE_WIDTH;
+          canvas.height = Confetti.CONST.SPRITE_HEIGHT;
+
+          canvas.position = {
+            initX: Math.random() * this.width,
+            initY: -canvas.height - Math.random() * this.yRange,
+          };
+
+          canvas.rotation =
+            this.rotationRange / 2 - Math.random() * this.rotationRange;
+          canvas.speed =
+            this.speedRange / 2 + Math.random() * (this.speedRange / 2);
+
+          ctx.save();
+          ctx.fillStyle =
+            Confetti.CONST.COLORS[
+              (Math.random() * Confetti.CONST.COLORS.length) | 0
+            ];
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.restore();
+
+          this.sprites.push(canvas);
+        }
+      }
+
+      render(now) {
+        let progress = this.progress.tick(now);
+
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+
+        for (let i = 0; i < this.length; ++i) {
+          this.ctx.save();
+          this.ctx.translate(
+            this.sprites[i].position.initX +
+              this.sprites[i].rotation *
+                Confetti.CONST.ROTATION_RATE *
+                progress,
+            this.sprites[i].position.initY +
+              progress * (this.height + this.yRange)
+          );
+          this.ctx.rotate(this.sprites[i].rotation);
+          this.ctx.drawImage(
+            this.sprites[i],
+            (-Confetti.CONST.SPRITE_WIDTH *
+              Math.abs(
+                Math.sin(progress * Math.PI * 2 * this.sprites[i].speed)
+              )) /
+              2,
+            -Confetti.CONST.SPRITE_HEIGHT / 2,
+            Confetti.CONST.SPRITE_WIDTH *
+              Math.abs(
+                Math.sin(progress * Math.PI * 2 * this.sprites[i].speed)
+              ),
+            Confetti.CONST.SPRITE_HEIGHT
+          );
+          this.ctx.restore();
+        }
+
+        requestAnimationFrame(this.render);
+      }
+    }
+
+    (() => {
+      const DURATION = 8000,
+        LENGTH = 120;
+
+      new Confetti({
+        width: window.innerWidth,
+        height: window.innerHeight,
+        length: LENGTH,
+        duration: DURATION,
+      });
+
+      setTimeout(() => {
+        new Confetti({
+          width: window.innerWidth,
+          height: window.innerHeight,
+          length: LENGTH,
+          duration: DURATION,
+        });
+      }, DURATION / 2);
+    })();
+
+    // letters
+    var letters = $("#demo span");
+    var lettersCount = 0;
+    TweenMax.staggerFrom(
+      letters,
+      0.24,
+      { opacity: 0, y: 200, ease: Back.easeOut },
+      0.5
+    );
+
+    //button
+    document.getElementById("next_button").onclick = function () {
+      this.innerText = "Clicked!";
+      setTimeout(() => {
+        window.location.href = "countdown.html";
+      }, 1000);
+    };
+  </script>
+</html>

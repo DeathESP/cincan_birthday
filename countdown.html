@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Happy Birthday Cincan!</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://static-00.iconduck.com/assets.00/gift-icon-2048x1882-1wugth41.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://static-00.iconduck.com/assets.00/gift-icon-2048x1882-1wugth41.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="countdown.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>it's only</td>
+      </tr>
+      <tr>
+        <td>
+          <div id="timer">
+            <div id="days"></div>
+            <div id="hours"></div>
+            <div id="minutes"></div>
+            <div id="seconds"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="text">until we'd finally meet!</div>
+        </td>
+      </tr>
+      <tr>
+        <td><button id="next_button">YAY</button></td>
+      </tr>
+    </table>
+  </body>
+
+  <script>
+    //Timer
+    function makeTimer() {
+      var endTime = new Date("May 18, 2025 7:00:00 UTC+7");
+      var endTime = Date.parse(endTime) / 1000;
+
+      var now = new Date();
+      var now = Date.parse(now) / 1000;
+
+      var timeLeft = endTime - now;
+
+      var days = Math.floor(timeLeft / 86400);
+      var hours = Math.floor((timeLeft - days * 86400) / 3600);
+      var minutes = Math.floor((timeLeft - days * 86400 - hours * 3600) / 60);
+      var seconds = Math.floor(
+        timeLeft - days * 86400 - hours * 3600 - minutes * 60
+      );
+
+      if (hours < "10") {
+        hours = "0" + hours;
+      }
+      if (minutes < "10") {
+        minutes = "0" + minutes;
+      }
+      if (seconds < "10") {
+        seconds = "0" + seconds;
+      }
+
+      $("#days").html(days + "<span>Days</span>");
+      $("#hours").html(hours + "<span>Hours</span>");
+      $("#minutes").html(minutes + "<span>Minutes</span>");
+      $("#seconds").html(seconds + "<span>Seconds</span>");
+    }
+
+    setInterval(function () {
+      makeTimer();
+    }, 1000);
+
+    document.getElementById("next_button").onclick = function () {
+      this.innerText = "Clicked!";
+      setTimeout(() => {
+        window.location.href = "ticket.html";
+      }, 1000);
+    };
+  </script>
+</html>
